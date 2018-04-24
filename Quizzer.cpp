@@ -25,7 +25,7 @@ int main(){
   if (account== 1)
     {
       //call function for creating an account
-      cout << "create an account";
+
     }
 
   if (account==2)
@@ -47,6 +47,7 @@ int main(){
   if(quiz==1)
     {
       //inFile.open("...");
+	  //call function to output and take quiz;
 
       if(!inFile)
 	{
@@ -59,6 +60,7 @@ int main(){
     if(quiz==2)
     {
       //inFile.open("...");
+	// call function to view and take quiz
 
       if(!inFile)
 	{
@@ -70,6 +72,7 @@ int main(){
   if(quiz==3)
     {
       //inFile.open("...");
+	  // call function to view and take quiz
 
       if(!inFile)
 	{
