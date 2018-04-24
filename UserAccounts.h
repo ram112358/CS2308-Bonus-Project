@@ -11,7 +11,7 @@ struct Account {
     string Username;
     vector<int> quizHist;
     int grade;
-}
+};
 
 class UserAccounts {
 private:
@@ -50,4 +50,33 @@ void UserAccounts::loadAccountData(){
             accounts[i/3].quizHist.push_back(tempInt);
         }
     }
+}
+
+bool testUsername(string input)
+{
+	if(input.length() < 4)
+	{
+	cout<<"Username length must be at least 4 characters";
+	return false;
+	}
+	return true;
+}
+
+bool testPassword(string input)
+{
+    bool passed = false;
+    int length = input.length();
+    for(int i = 0; i < length; i++)
+    {
+        if(isdigit(input[i]))
+            passed = true;
+    }
+    if(input.length() <4)
+	{
+	cout<<"Password length must be at least 4 characters";
+	return false;
+	}
+	if(passed == false)
+        cout << "Password must contain at least one number";
+	return passed;
 }
