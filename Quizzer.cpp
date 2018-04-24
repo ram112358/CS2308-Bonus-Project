@@ -47,14 +47,7 @@ int main(){
     }
   cin >> quiz;
 
-
-  for (int i=0; i<NUM; i++)
-    {
-      while (quiz==i)
-	{
-	  //call function to open and take quiz;
-	}
-    }
+//call function to view and take quiz
 
 
 
