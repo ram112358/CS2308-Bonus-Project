@@ -31,7 +31,7 @@ public:
 void QuizReader::readFile(std::string filename) {
     std::ifstream file(filename);
     if (!file) {
-        std::cout << "Error opening file" << '\n';
+        std::cout << "Error opening quiz file" << '\n';
     }
     std::string currLine;
     std::getline(file, currLine);

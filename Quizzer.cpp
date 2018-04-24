@@ -6,6 +6,8 @@ Course: CS2308
  */
 #include <iostream>
 #include<fstream>
+#include"QuizReader.h"
+#include"UserAccounts.h"
 
 using namespace std;
 
@@ -13,7 +15,6 @@ int main(){
 
   int account;
   const int NUM = 3;
-  int quizzes[NUM];
   string user;
   string password;
   int quiz;

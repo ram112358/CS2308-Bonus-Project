@@ -1,5 +1,5 @@
-#ifndef QUIZREADER_H
-#define QUIZREADER_H
+#ifndef USERACCOUNTS_H
+#define USERACCOUNTS_H
 #include <fstream>
 #include <string>
 #include <iostream>
@@ -16,7 +16,14 @@ class UserAccounts {
 private:
     vector<Account> accounts;
     Account current;
+    fstream file;
 public:
+    UserAccounts(){
+        if (!file) {
+            std::cout << "Error opening file" << '\n';
+        }
+    }
+
     void logIn();
     void loadAccountData(); // load the accounts from the file to the accounts vector
     void storeAccountData(); // stores the accounts vector into the file
@@ -27,4 +34,8 @@ public:
     void setUpAccount(string username, string password); // prompt the user for a username and password and then call inidializeAccount
     bool testUsername(string input); // tests to see if a username is valid and not in the list
     bool testPassword(string input); //tests to see if a password if valid
+}
+
+void UserAccounts::loadAccountData(){
+
 }
