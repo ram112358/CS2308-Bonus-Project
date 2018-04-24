@@ -5,20 +5,21 @@ Assignment: Bonus Project
 Course: CS2308
  */
 #include <iostream>
+#include<fstream>
 
 using namespace std;
 
 int main(){
-    
+
   int account;
-  const int NUM;
+  const int NUM = 3;
   int quizzes[NUM];
   string user;
   string password;
   int quiz;
   ifstream inFile;
   int option;
-  
+
   cout << "Welcome!" << endl;
   cout << "Enter '1' to create an account."<< endl;
   cout<< "If you already have an acount, enter '2' to log in." << endl;
@@ -43,7 +44,7 @@ int main(){
   for (int i=0; i<NUM; i++)
     {
       cout << i << ". Quiz " << i;
-      
+
     }
   cin >> quiz;
 
@@ -66,12 +67,12 @@ int main(){
       for (int i=0; i<NUM; i++)
     {
       cout << i << ". Quiz " << i;
-      
+
     }
 
   cin >> quiz;
     }
-  
+
 
 
     return 0;
