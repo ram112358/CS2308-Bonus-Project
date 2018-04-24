@@ -10,7 +10,9 @@ using namespace std;
 
 int main(){
     
-     int account;
+  int account;
+  const int NUM;
+  int quizzes[NUM];
   string user;
   string password;
   int quiz;
@@ -25,7 +27,7 @@ int main(){
   if (account== 1)
     {
       //call function for creating an account
-
+      cout << "create an account";
     }
 
   if (account==2)
@@ -38,49 +40,23 @@ int main(){
     }
 
   cout << "Hello! Enter in which quiz you would like to take" << endl;
-  cout << "1. Quiz 1" << endl;
-  cout << "2. Quiz 2" << endl;
-  cout << "3. Quiz 3" << endl;
+  for (int i=0; i<NUM; i++)
+    {
+      cout << i << ". Quiz " << i;
+      
+    }
   cin >> quiz;
 
 
-  if(quiz==1)
+  for (int i=0; i<NUM; i++)
     {
-      //inFile.open("...");
-	  //call function to output and take quiz;
-
-      if(!inFile)
+      while (quiz==i)
 	{
-	  cout << "Unable to open file";
-	  exit(1);
+	  //call function to open and take quiz;
 	}
-
     }
 
-    if(quiz==2)
-    {
-      //inFile.open("...");
-	// call function to view and take quiz
 
-      if(!inFile)
-	{
-	  cout << "Unable to open file";
-	  exit(1);
-	}
-
-    }
-  if(quiz==3)
-    {
-      //inFile.open("...");
-	  // call function to view and take quiz
-
-      if(!inFile)
-	{
-	  cout << "Unable to open file";
-	  exit(1);
-	}
-
-    }
 
   cout << "Would you like to view your scores or take another quiz?" << endl;
   cout << "1.View my scores" << endl;
@@ -94,14 +70,16 @@ int main(){
   else if(option==2)
     {
     cout << "Hello! Enter in which quiz you would like to take" << endl;
-  cout << "1. Quiz 1" << endl;
-  cout << "2. Quiz 2" << endl;
-  cout << "3. Quiz 3" << endl;
+      for (int i=0; i<NUM; i++)
+    {
+      cout << i << ". Quiz " << i;
+      
+    }
+
   cin >> quiz;
     }
   
 
-  
 
     return 0;
 }
