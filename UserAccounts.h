@@ -38,7 +38,7 @@ public:
 
     bool logIn(string username, string password); // takes username and password and matches them to an account, sets current
     void enterGrade(int quizNumber, int grade); // enter a grade for a specific quiz out of 100
-    void displayGrades(); // needs work
+    void displayGrades(); // displays the quizzes taken
     void setUpAccount(); // prompt the user for a username and password and then call inidializeAccount
 };
 
@@ -161,9 +161,6 @@ void UserAccounts::displayGrades(){
     for (int i = 0; i < current->quizHist.size(); i++){
         if (current->quizHist[i] != 200){
             cout << "Quiz #" << i+1 << ": " << current->quizHist[i];
-        }
-        else{
-            cout << "Quiz #" << i+1 << ": N/A";
         }
     }
 }
