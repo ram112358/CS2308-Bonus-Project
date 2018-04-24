@@ -20,7 +20,7 @@ class UserAccounts {
 private:
     vector<Account> accounts;
     vector<string> fileData;
-    Account current;
+    Account* current;
     fstream accountFile;
 
     void loadAccountData(); // load the accounts from the file to the accounts vector
@@ -36,11 +36,10 @@ public:
         }
     }
 
-    void logIn(string username, string password); // takes username and password and matches them to an account, sets current
+    bool logIn(string username, string password); // takes username and password and matches them to an account, sets current
     void enterGrade(int quizNumber, int grade); // enter a grade for a specific quiz out of 100
     void displayGrades(); // needs work
-
-    void setUpAccount(string username, string password); // prompt the user for a username and password and then call inidializeAccount
+    void setUpAccount(); // prompt the user for a username and password and then call inidializeAccount
 };
 
 void UserAccounts::loadAccountData(){
@@ -126,31 +125,49 @@ bool UserAccounts::testPassword(string input){
     return passed;
 }
 
-void UserAccounts::logIn(string username, string password){}
+bool UserAccounts::logIn(string username, string password){
+    for (int i = 0; i < accounts.size(); i++){
+        if (accounts[i].Username == username && accounts[i].Password == password){
+            current = &accounts[i];
+            return true;
+        }
+    }
+    cout << "Please enter the right username and password." << endl;
+    return false;
+}
 
 void UserAccounts::enterGrade(int quizNumber, int quizGrade){
     int tempGrade = 0;
     int quizzesTaken = 0;
 
-    if (quizNumber > current.quizHist.size()){
-        for (int i = 0; i < quizNumber - current.quizHist.size(); i++){
-            current.quizHist.push_back(200);
+    if (quizNumber > current->quizHist.size()){
+        for (int i = 0; i < quizNumber - current->quizHist.size(); i++){
+            current->quizHist.push_back(200);
         }
     }
 
-    current.quizHist[quizNumber - 1] = quizGrade;
+    current->quizHist[quizNumber - 1] = quizGrade;
 
-    for (int i = 0; i < current.quizHist.size(); i++){
-        if (current.quizHist[i] != 200){
-            tempGrade += current.quizHist[i];
+    for (int i = 0; i < current->quizHist.size(); i++){
+        if (current->quizHist[i] != 200){
+            tempGrade += current->quizHist[i];
             quizzesTaken++;
         }
     }
-    current.grade = tempGrade/quizzesTaken;
+    current->grade = tempGrade/quizzesTaken;
 }
 
-void UserAccounts::displayGrades(){}
+void UserAccounts::displayGrades(){
+    for (int i = 0; i < current->quizHist.size(); i++){
+        if (current->quizHist[i] != 200){
+            cout << "Quiz #" << i+1 << ": " << current->quizHist[i];
+        }
+        else{
+            cout << "Quiz #" << i+1 << ": N/A";
+        }
+    }
+}
 
-void UserAccounts::setUpAccount(string username, string password){}
+void UserAccounts::setUpAccount(){}
 
 #endif

@@ -13,32 +13,37 @@ using namespace std;
 
 int main(){
 
-  int account;
   const int NUM = 3;
-  string user;
+  string username;
   string password;
   int quiz;
   ifstream inFile;
   int option;
+  UserAccounts account();
 
   cout << "Welcome!" << endl;
   cout << "Enter '1' to create an account."<< endl;
   cout<< "If you already have an acount, enter '2' to log in." << endl;
-  cin >> account;
+  cin >> option;
 
-  if (account== 1)
+  if (option== 1)
     {
-      //call function for creating an account
-      cout << "create an account";
+      cout << "Create an account" << endl;
+      account.setUpAccount();
     }
 
-  if (account==2)
+  if (option==2)
     {
       cout << "Username: ";
-      cin >> user;
+      cin >> username;
       cout << endl << "Password: ";
       cin >> password;
-      // call function to check is acount is correct (bool)
+      while (account.logIn(username, password)){
+            cout << "Username: ";
+            cin >> username;
+            cout << endl << "Password: ";
+            cin >> password;
+      }
     }
 
   cout << "Hello! Enter in which quiz you would like to take" << endl;
@@ -60,7 +65,7 @@ int main(){
 
   if(option==1)
     {
-      //call function to view score
+        account.displayGrades();
     }
   else if(option==2)
     {
