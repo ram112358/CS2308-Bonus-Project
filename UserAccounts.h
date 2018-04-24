@@ -2,13 +2,16 @@
 #define USERACCOUNTS_H
 #include <fstream>
 #include <string>
+#include <vector>
 #include <iostream>
 #include <sstream>
+#include <string>
 
 using namespace std;
 
 struct Account {
     string Username;
+    string Password;
     vector<int> quizHist;
     int grade;
 };
@@ -16,67 +19,138 @@ struct Account {
 class UserAccounts {
 private:
     vector<Account> accounts;
-    vecctor<string> fileData;
+    vector<string> fileData;
     Account current;
-    fstream accountFile("Account.Data", ios::in|ios:: out);
+    fstream accountFile;
+
     void loadAccountData(); // load the accounts from the file to the accounts vector
     void storeAccountData(); // stores the accounts vector into the file
+    void initializeAccount(string username, string password); // add an account to the file and then logs in
+    bool testUsername(string input); // tests to see if a username is valid and not in the list
+    bool testPassword(string input); //tests to see if a password if valid
 public:
     UserAccounts(){
-        if (!file) {
+        accountFile.open("Account.Data", fstream::in | fstream::out);
+        if (!accountFile) {
             std::cout << "Error opening file" << '\n';
         }
     }
 
-    void logIn(); //
+    void logIn(string username, string password); // takes username and password and matches them to an account, sets current
     void enterGrade(int quizNumber, int grade); // enter a grade for a specific quiz out of 100
+    void displayGrades(); // needs work
 
-    void initializeAccount(); // add an account to the file
     void setUpAccount(string username, string password); // prompt the user for a username and password and then call inidializeAccount
-    bool testUsername(string input); // tests to see if a username is valid and not in the list
-    bool testPassword(string input); //tests to see if a password if valid
-}
+};
 
 void UserAccounts::loadAccountData(){
     string temp;
     int tempInt;
-    while(getline(accountFile, line)){fileData.push_back(line)}
-    for(i = 0; i < fileData.size(); i+=3){
+    accountFile.clear();
+    accountFile.seekg(0);
+    while(getline(accountFile, temp)){fileData.push_back(temp);}
+    for(int i = 0; i < fileData.size(); i+=3){
         accounts[i/3].Username = fileData[i];
+        accounts[i/3].Password = fileData[i+1];
+
+        accounts[i/3].quizHist.clear();
         stringstream ss(fileData[i+2]);
-        while(getline(ss, )){
-            stringstream int(temp);
-            temp >> tempInt;
+        while(getline(ss, temp,'/')){
+            stringstream (temp) >> tempInt;
             accounts[i/3].quizHist.push_back(tempInt);
         }
+
+        int tempGrade = 0;
+        int quizzesTaken = 0;
+        for (int j = 0; j < accounts[i/3].quizHist.size(); j++){
+            if (accounts[i/3].quizHist[j] != 200){
+                tempGrade += accounts[i/3].quizHist[j];
+                quizzesTaken++;
+            }
+        }
+        accounts[i/3].grade = tempGrade/quizzesTaken;
     }
 }
 
-bool testUsername(string input)
-{
-	if(input.length() < 4)
-	{
-	cout<<"Username length must be at least 4 characters";
-	return false;
-	}
-	return true;
+void UserAccounts::storeAccountData(){
+    string temp;
+    accountFile.clear();
+    accountFile.seekp(0);
+    for (int i = 0; i < 3*accounts.size(); i+=3){
+        fileData[i] = accounts[i/3].Username;
+        fileData[i+1] = accounts[i/3].Password;
+        temp = "";
+        for (int j = 0; j<accounts[i/3].quizHist.size(); j++){
+            stringstream ss;
+            ss << accounts[i/3].quizHist[j];
+            temp.append(ss.str());
+            if (j = accounts[i/3].quizHist.size()-1)
+                temp.append("/");
+        }
+        fileData[i+2] = temp;
+    }
+    for (int i = 0; i < fileData.size(); i ++){
+        accountFile << fileData[i] << endl;
+    }
 }
 
-bool testPassword(string input)
-{
+void UserAccounts::initializeAccount(string username, string password){
+    Account temp;
+    temp.Username = username;
+    temp.Password = password;
+    accounts.push_back(temp);
+    logIn(username, password);
+}
+
+bool UserAccounts::testUsername(string input){
+    if(input.length() < 4){
+        cout<<"Username length must be at least 4 characters";
+        return false;
+    }
+    return true;
+}
+
+bool UserAccounts::testPassword(string input){
     bool passed = false;
     int length = input.length();
-    for(int i = 0; i < length; i++)
-    {
+    for(int i = 0; i < length; i++){
         if(isdigit(input[i]))
-            passed = true;
+        passed = true;
     }
-    if(input.length() <4)
-	{
-	cout<<"Password length must be at least 4 characters";
-	return false;
-	}
-	if(passed == false)
-        cout << "Password must contain at least one number";
-	return passed;
+    if(input.length() <4){
+        cout<<"Password length must be at least 4 characters";
+        return false;
+    }
+    if(passed == false)
+    cout << "Password must contain at least one number";
+    return passed;
 }
+
+void UserAccounts::logIn(string username, string password){}
+
+void UserAccounts::enterGrade(int quizNumber, int quizGrade){
+    int tempGrade = 0;
+    int quizzesTaken = 0;
+
+    if (quizNumber > current.quizHist.size()){
+        for (int i = 0; i < quizNumber - current.quizHist.size(); i++){
+            current.quizHist.push_back(200);
+        }
+    }
+
+    current.quizHist[quizNumber - 1] = quizGrade;
+
+    for (int i = 0; i < current.quizHist.size(); i++){
+        if (current.quizHist[i] != 200){
+            tempGrade += current.quizHist[i];
+            quizzesTaken++;
+        }
+    }
+    current.grade = tempGrade/quizzesTaken;
+}
+
+void UserAccounts::displayGrades(){}
+
+void UserAccounts::setUpAccount(string username, string password){}
+
+#endif
