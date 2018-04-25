@@ -50,8 +50,7 @@ int main(){
             cin >> password;
       }
     }
-
-<<<<<<< HEAD
+    
     while (cont) {
         cout << "Hello! Enter in which quiz you would like to take" << endl;
         for (int i=0; i<NUM; i++)
@@ -79,16 +78,6 @@ int main(){
         {
             cont = true;
         }
-=======
-  cout << "Hello! Enter in which quiz you would like to take" << endl;
-  for (int i=0; i<NUM; i++)
-    {
-      cout << i << ". Quiz " << i;
-    }
-  cin >> quiz;
-
-//call function to view and take quiz
->>>>>>> e1e41e84492f45ab2366eeb08bcded60355f3506
 
     }
 
