@@ -106,19 +106,18 @@ void UserAccounts::initializeAccount(string username, string password){
 }
 
 bool UserAccounts::testUsername(string input){
-    for(int i = 0; i < fileData.size(); i++)
+	if(input.length() <4){
+	       cout<<"Username length must be at least 4 characters" << endl;
+	return false;
+	}
+    for(int i = 0; i < accounts.size(); i++)
     {
-        if(Account[i].Username == input)
+        if(accounts[i].Username == input)
         {
             cout << "Duplicate username" << endl;
             return false;
         }
     }
-	if(input.length() <4)
-	{
-	cout<<"Username length must be at least 4 characters";
-	return false;
-	}
 	return true;
 }
 
@@ -130,11 +129,11 @@ bool UserAccounts::testPassword(string input){
         passed = true;
     }
     if(input.length() <4){
-        cout<<"Password length must be at least 4 characters";
+        cout<<"Password length must be at least 4 characters and contain at least one number" << endl;
         return false;
     }
     if(passed == false)
-    cout << "Password must contain at least one number";
+    cout<<"Password length must be at least 4 characters and contain at least one number" << endl;
     return passed;
 }
 
@@ -178,6 +177,21 @@ void UserAccounts::displayGrades(){
     }
 }
 
-void UserAccounts::setUpAccount(){}
+void UserAccounts::setUpAccount(){
+    string username, password;
+    cout << "Enter a Username: ";
+    cin >> username;
+    while (testUsername(username)){
+        cout << "Enter a Username: ";
+        cin >> username;
+    }
+    cout << endl << "Enter a Password: ";
+    cin >> password;
+    while (testPassword(password)){
+        cout << endl << "Enter a Password: ";
+        cin >> password;
+    }
+    initializeAccount(username,password);
+}
 
 #endif
