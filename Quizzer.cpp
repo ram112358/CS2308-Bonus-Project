@@ -60,28 +60,35 @@ int main(){
 
         }
         cin >> quiz;
-        quiz--;
         QuizReader quizReader;
-        quizReader.readFile(quizFiles[quiz]);
+        quizReader.readFile(quizFiles[quiz-1]);
         QuizTaker quizTaker(quizReader.getQuestions());
         finalScore = quizTaker.takeQuiz();
+        account.enterGrade(quiz, finalScore);
 
-        cout << "Would you like to view your scores or take another quiz?" << endl;
-        cout << "1.View my scores" << endl;
-        cout << "2.Take another quiz" << endl;
-        cin >> option;
+        bool gradecont;
+        do {
+            gradecont = false;
+            cout << endl;
+            cout << "Would you like to view your scores or take another quiz?" << endl;
+            cout << "1.View my scores" << endl;
+            cout << "2.Take another quiz" << endl;
+            cout << "3.Quit" << endl;
+            cin >> option;
 
-        if(option==1)
-        {
-            account.displayGrades();
-        }
-        else if(option==2)
-        {
-            cont = true;
-        }
+            if(option==1)
+            {
+                account.displayGrades();
+                gradecont = true;
+            }
+            else if(option==2)
+            {
+                cont = true;
+            }
+        } while (gradecont);
 
     } while (cont);
-
+    account.storeAccountData();
     std::cout << "Thank you for playing!" << '\n';
     return 0;
 }

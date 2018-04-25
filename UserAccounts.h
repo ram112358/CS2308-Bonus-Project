@@ -24,7 +24,6 @@ private:
     fstream accountFile;
 
     void loadAccountData(); // load the accounts from the file to the accounts vector
-    void storeAccountData(); // stores the accounts vector into the file
     void initializeAccount(string username, string password); // add an account to the file and then logs in
     bool testUsername(string input); // tests to see if a username is valid and not in the list
     bool testPassword(string input); //tests to see if a password if valid
@@ -36,10 +35,8 @@ public:
         }
         loadAccountData();
     }
-    ~UserAccounts(){
-        storeAccountData();
-    }
 
+    void storeAccountData(); // stores the accounts vector into the file
     bool logIn(string username, string password); // takes username and password and matches them to an account, sets current
     void enterGrade(int quizNumber, int grade); // enter a grade for a specific quiz out of 100
     void displayGrades(); // displays the quizzes taken
@@ -157,7 +154,6 @@ void UserAccounts::enterGrade(int quizNumber, int quizGrade){
             current->quizHist.push_back(200);
         }
     }
-
     current->quizHist[quizNumber - 1] = quizGrade;
 
     for (int i = 0; i < current->quizHist.size(); i++){
@@ -166,13 +162,13 @@ void UserAccounts::enterGrade(int quizNumber, int quizGrade){
             quizzesTaken++;
         }
     }
-    current->grade = tempGrade/quizzesTaken;
+    //current->grade = tempGrade/quizzesTaken;
 }
 
 void UserAccounts::displayGrades(){
     for (int i = 0; i < current->quizHist.size(); i++){
         if (current->quizHist[i] != 200){
-            cout << "Quiz #" << i+1 << ": " << current->quizHist[i];
+            cout << "Quiz #" << i+1 << ": " << current->quizHist[i] <<endl;
         }
     }
 }
