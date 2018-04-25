@@ -38,8 +38,8 @@ int QuizTaker::takeQuiz() {
         }
         std::cout << std::endl;
     }
-    std::cout << "Your final score: " << score <<"/"<< questions.size() << '\n';
-
+    int percent = static_cast<int>(score / questions.size() * 100);
+    std::cout << "Your final score: " << percent << " percent (" << score << "/" << questions.size() << ")" <<'\n';
 }
 
 #endif
