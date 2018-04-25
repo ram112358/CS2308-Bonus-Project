@@ -102,11 +102,20 @@ void UserAccounts::initializeAccount(string username, string password){
 }
 
 bool UserAccounts::testUsername(string input){
-    if(input.length() < 4){
-        cout<<"Username length must be at least 4 characters";
-        return false;
+    for(int i = 0; i < fileData.size(); i++)
+    {
+        if(Account[i].Username == input)
+        {
+            cout << "Duplicate username" << endl;
+            return false;
+        }
     }
-    return true;
+	if(input.length() <4)
+	{
+	cout<<"Username length must be at least 4 characters";
+	return false;
+	}
+	return true;
 }
 
 bool UserAccounts::testPassword(string input){
