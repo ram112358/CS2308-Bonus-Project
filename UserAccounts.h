@@ -34,6 +34,10 @@ public:
         if (!accountFile) {
             std::cout << "Error opening file" << '\n';
         }
+        loadAccountData();
+    }
+    ~UserAccounts(){
+        storeAccountData();
     }
 
     bool logIn(string username, string password); // takes username and password and matches them to an account, sets current
