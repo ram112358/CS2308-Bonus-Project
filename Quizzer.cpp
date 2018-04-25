@@ -41,17 +41,18 @@ int main(){
     {
       cout << "Username: ";
       cin >> username;
-      cout << endl << "Password: ";
+      cout << "Password: ";
       cin >> password;
       while (!account.logIn(username, password)){
             cout << "Username: ";
             cin >> username;
-            cout << endl << "Password: ";
+            cout << "Password: ";
             cin >> password;
+
       }
     }
-    
-    while (cont) {
+    do {
+        cont = false;
         cout << "Hello! Enter in which quiz you would like to take" << endl;
         for (int i=0; i<NUM; i++)
         {
@@ -79,7 +80,8 @@ int main(){
             cont = true;
         }
 
-    }
+    } while (cont);
 
+    std::cout << "Thank you for playing!" << '\n';
     return 0;
 }

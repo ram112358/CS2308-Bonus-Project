@@ -51,9 +51,10 @@ void QuizReader::readFile(std::string filename) {
         q->answers = tokens;
 
         for (int i=0; i < q->answers.size(); i++) {
-            if (q->answers[i][0] == '~');
-            q->answers[i].substr(1, std::string::npos);
-            q->correct = i;
+            if (q->answers[i][0] == '~'){
+                q->answers[i] = q->answers[i].substr(1, std::string::npos);
+                q->correct = i;
+            }
         }
         questions.push_back(*q);
     }

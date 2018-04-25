@@ -181,13 +181,13 @@ void UserAccounts::setUpAccount(){
     string username, password;
     cout << "Enter a Username: ";
     cin >> username;
-    while (testUsername(username)){
+    while (!testUsername(username)){
         cout << "Enter a Username: ";
         cin >> username;
     }
     cout << endl << "Enter a Password: ";
     cin >> password;
-    while (testPassword(password)){
+    while (!testPassword(password)){
         cout << endl << "Enter a Password: ";
         cin >> password;
     }
