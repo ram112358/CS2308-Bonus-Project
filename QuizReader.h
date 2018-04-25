@@ -59,41 +59,4 @@ void QuizReader::readFile(std::string filename) {
     }
 }
 
-//shows the vector of questions to the user***********************************
-void showQuestions(std::string "quiz1.quiz")
-{
-  int answer = 0;
-  int total = 0;
-
-  ifstream fin;
-  fin.open("quiz1.quiz");
-  for ( int i = 0; i < showQuestions.size(); i++)
-    {
-
-      int score = Questions.size();
-  cout << showQuestions[i]  << endl;
-      cin >> answer;
-
-      //if the answer is wrong, do not get the total
-      if (answer == //right answer)
-  {
-   total += answer;
-  }
-
-     }
-      int score;
-      sscore = (total/showQuestions.size());
-      ofstream fout;
-      //output scores into a text file
-      fout.open("showScores.txt");
-      fout << "total for quiz: " <<  score;
-
-      //displaying the score when the user is done with the quiz
-      cout << "Your score is " << score;
-
-}
-//*****************************************************************************
-
-
-
 #endif
